@@ -1,0 +1,43 @@
+replicaCount: 1
+
+image:
+  repository: harbor.phink8s.com/library/hjs-beta
+  pullPolicy: Always
+  # Tag is set from Chart.yaml appVersion
+
+namespace: web-app
+
+secretsName: hjsbeta-secrets
+
+service:
+  service: hjs-beta-svc
+  port: 80
+
+ingress:
+  enabled: true
+  host: hjsbeta.phink8s.com
+  adminHost: hjsbeta-admin.phink8s.com
+  secretName: wildcard-phink8s.com-tls
+
+deployment:
+  volumeMounts:
+    name: hjs-beta
+    mountPath: /var/www/html 
+
+persistenceVolume:
+  name: hjs-beta-pv
+  nfsServer: 192.168.20.57
+  nfsPath: /srv/k8s/hjs-beta
+  size: 2Gi
+  reclaimPolicy: Retain
+  accessModes:
+    - ReadWriteMany
+  mountOptions:
+    - nfsvers=4.2
+    - hard
+
+persistenceVolumeClaim:
+  name: hjs-beta-pvc
+  size: 2Gi
+  accessModes:
+    - ReadWriteMany
