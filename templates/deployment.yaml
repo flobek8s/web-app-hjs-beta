@@ -37,4 +37,4 @@ spec:
       volumes:
         - name: {{ .Values.deployment.volumeMounts.name }}
           persistentVolumeClaim:
-            claimName: {{ .Values.persistentVolumeClaim.name }}
+            claimName: {{ .Values.persistenceVolumeClaim.name }}
