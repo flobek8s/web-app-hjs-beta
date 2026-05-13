@@ -3,6 +3,7 @@ kind: PersistentVolume
 metadata:
   name: {{ .Values.persistenceVolume.name }}
 spec:
+  storageClassName: nfs-static
   capacity:
     storage: {{ .Values.persistenceVolume.size }}
   accessModes:
@@ -24,6 +25,7 @@ metadata:
   name: {{ .Values.persistenceVolumeClaim.name }}
   namespace: {{ .Values.namespace }}
 spec:
+  storageClassName: nfs-static
   accessModes:
     {{- range .Values.persistenceVolumeClaim.accessModes }}
     - {{ . }}
