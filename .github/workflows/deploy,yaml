@@ -1,4 +1,4 @@
-name: HJs-Beta-Build-and-Deploy
+name: HJsBeta-Build-and-Deploy
 
 on:
   push:
